@@ -1,30 +1,46 @@
 package ba.unsa.etf.rpr.projekat;
 
 public class TechnicalInspection {
-    enum InspectionType{
-        REGULAR, EXTRAORDINARY, PREVENTIVE
+    public enum InspectionType {
+        REGULAR, EXTRAORDINARY, PREVENTIVE;
     }
-    enum InspectionStage{
-        VISUAL_INSPECTION, IDENTIFICATION, EQUIPMENT_INSPECTION
+
+    public enum InspectionEvaluation {
+        FAILED, PASSED, NO_DATA;
     }
-    private User user;
+
+    private int inspectionId;
+    private Owner owner;
     private Vehicle vehicle;
     private InspectionType inspectionType;
-    private InspectionStage inspectionStage;
+    private InspectionEvaluation inspectionEvalation;
+    // private String inspectionStage; // auto?
+    //private int controllorId;
+    // private datum
 
-    public TechnicalInspection(User user, Vehicle vehicle, InspectionType inspectionType, InspectionStage inspectionStage) {
-        this.user = user;
+
+    public TechnicalInspection(int inspectionId, Owner owner, Vehicle vehicle, InspectionType inspectionType, InspectionEvaluation inspectionEvalation) {
+        this.inspectionId = inspectionId;
+        this.owner = owner;
         this.vehicle = vehicle;
         this.inspectionType = inspectionType;
-        this.inspectionStage = inspectionStage;
+        this.inspectionEvalation = inspectionEvalation;
     }
 
-    public User getUser() {
-        return user;
+    public int getInspectionId() {
+        return inspectionId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setInspectionId(int inspectionId) {
+        this.inspectionId = inspectionId;
+    }
+
+    public Owner getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Owner owner) {
+        this.owner = owner;
     }
 
     public Vehicle getVehicle() {
@@ -43,11 +59,11 @@ public class TechnicalInspection {
         this.inspectionType = inspectionType;
     }
 
-    public InspectionStage getInspectionStage() {
-        return inspectionStage;
+    public InspectionEvaluation getInspectionEvalation() {
+        return inspectionEvalation;
     }
 
-    public void setInspectionStage(InspectionStage inspectionStage) {
-        this.inspectionStage = inspectionStage;
+    public void setInspectionEvalation(InspectionEvaluation inspectionEvalation) {
+        this.inspectionEvalation = inspectionEvalation;
     }
 }

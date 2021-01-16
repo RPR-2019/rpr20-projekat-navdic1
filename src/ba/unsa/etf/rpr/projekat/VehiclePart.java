@@ -1,14 +1,14 @@
 package ba.unsa.etf.rpr.projekat;
 
+
 public class VehiclePart {
     private String partName;
     private boolean technicalValidity;
-    private TechnicalInspection.InspectionStage inspectionStage;
 
-    public VehiclePart(String partName, boolean technicalValidity, TechnicalInspection.InspectionStage inspectionStage) {
+
+    public VehiclePart(String partName, boolean technicalValidity) {
         this.partName = partName;
         this.technicalValidity = technicalValidity;
-        this.inspectionStage = inspectionStage;
     }
 
     public String getPartName() {
@@ -27,11 +27,4 @@ public class VehiclePart {
         this.technicalValidity = technicalValidity;
     }
 
-    public TechnicalInspection.InspectionStage getInspectionStage() {
-        return inspectionStage;
-    }
-
-    public void setInspectionStage(TechnicalInspection.InspectionStage inspectionStage) {
-        this.inspectionStage = inspectionStage;
-    }
 }

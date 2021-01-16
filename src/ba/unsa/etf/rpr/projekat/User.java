@@ -3,29 +3,26 @@ package ba.unsa.etf.rpr.projekat;
 import javafx.beans.property.SimpleStringProperty;
 
 public class User {
-    private String name;
-    private String surname;
+    private int userId;
     private SimpleStringProperty username, password;
 
-    public User(String username, String password) {
+    public User(int id, String username, String password) {
+        this.userId = id;
         this.username = new SimpleStringProperty(username);
         this.password = new SimpleStringProperty(password);
     }
 
-    public String getName() {
-        return name;
+    @Override
+    public String toString() {
+        return  getUsername() ;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public int getUserId() {
+        return userId;
     }
 
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getUsername() {

@@ -1,89 +1,117 @@
 package ba.unsa.etf.rpr.projekat;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Vehicle {
-    private SimpleStringProperty ownerName, ownerSurname, ownerIdNum;
-    private String type, brand, fuel, colour;
+    public enum VehicleCategory {
+        TESKA, LAKA, SREDNJA;
+    }
+    public enum Fuel {
+        BENSINE, DIESEL;
+    }
+    //owner??
+    private int vehicleId;
+    private VehicleCategory vehicleCategory;
+    private SimpleStringProperty brand, motorNumber, registrationPlate;
+    private Fuel fuel;
+    private SimpleIntegerProperty year;
+
     // marka i tip, jacina motora, tip goriva, kategorija vozila, broj vrata, godište,
     // boja , kubikaža motora, broj sjedista, broj motora, broj šasije
 
 
-    public Vehicle(String ownerName, String ownerSurname, String ownerIdNum, String type, String brand, String fuel, String colour) {
-        this.ownerName = new SimpleStringProperty(ownerName);
-        this.ownerSurname = new SimpleStringProperty(ownerSurname);
-        this.ownerIdNum = new SimpleStringProperty(ownerIdNum);
-        this.type = type;
+    public Vehicle(int vehicleId, VehicleCategory vehicleCategory, SimpleStringProperty brand, SimpleStringProperty motorNumber, SimpleStringProperty registrationPlate, Fuel fuel, SimpleIntegerProperty year) {
+        this.vehicleId = vehicleId;
+        this.vehicleCategory = vehicleCategory;
         this.brand = brand;
+        this.motorNumber = motorNumber;
+        this.registrationPlate = registrationPlate;
         this.fuel = fuel;
-        this.colour = colour;
+        this.year = year;
     }
 
-    public String getOwnerName() {
-        return ownerName.get();
+    public Vehicle() {
+        this.brand = new SimpleStringProperty();
+        this.motorNumber = new SimpleStringProperty();
+        this.registrationPlate = new SimpleStringProperty();
+        this.year = new SimpleIntegerProperty();
     }
 
-    public SimpleStringProperty ownerNameProperty() {
-        return ownerName;
+    @Override
+    public String toString() {
+        return   getBrand() ;
     }
 
-    public void setOwnerName(String ownerName) {
-        this.ownerName.set(ownerName);
+    public int getVehicleId() {
+        return vehicleId;
     }
 
-    public String getOwnerSurname() {
-        return ownerSurname.get();
+    public void setVehicleId(int vehicleId) {
+        this.vehicleId = vehicleId;
     }
 
-    public SimpleStringProperty ownerSurnameProperty() {
-        return ownerSurname;
+    public VehicleCategory getVehicleCategory() {
+        return vehicleCategory;
     }
 
-    public void setOwnerSurname(String ownerSurname) {
-        this.ownerSurname.set(ownerSurname);
+    public void setVehicleCategory(VehicleCategory vehicleCategory) {
+        this.vehicleCategory = vehicleCategory;
     }
 
-    public String getOwnerIdNum() {
-        return ownerIdNum.get();
+    public Fuel getFuel() {
+        return fuel;
     }
 
-    public SimpleStringProperty ownerIdNumProperty() {
-        return ownerIdNum;
-    }
-
-    public void setOwnerIdNum(String ownerIdNum) {
-        this.ownerIdNum.set(ownerIdNum);
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
+    public void setFuel(Fuel fuel) {
+        this.fuel = fuel;
     }
 
     public String getBrand() {
+        return brand.get();
+    }
+
+    public SimpleStringProperty brandProperty() {
         return brand;
     }
 
     public void setBrand(String brand) {
-        this.brand = brand;
+        this.brand.set(brand);
     }
 
-    public String getFuel() {
-        return fuel;
+    public String getMotorNumber() {
+        return motorNumber.get();
     }
 
-    public void setFuel(String fuel) {
-        this.fuel = fuel;
+    public SimpleStringProperty motorNumberProperty() {
+        return motorNumber;
     }
 
-    public String getColour() {
-        return colour;
+    public void setMotorNumber(String motorNumber) {
+        this.motorNumber.set(motorNumber);
     }
 
-    public void setColour(String colour) {
-        this.colour = colour;
+    public String getRegistrationPlate() {
+        return registrationPlate.get();
+    }
+
+    public SimpleStringProperty registrationPlateProperty() {
+        return registrationPlate;
+    }
+
+    public void setRegistrationPlate(String registrationPlate) {
+        this.registrationPlate.set(registrationPlate);
+    }
+
+    public int getYear() {
+        return year.get();
+    }
+
+    public SimpleIntegerProperty yearProperty() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year.set(year);
     }
 }
