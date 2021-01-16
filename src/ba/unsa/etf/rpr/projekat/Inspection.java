@@ -13,18 +13,18 @@ public class Inspection {
     private Owner owner;
     private Vehicle vehicle;
     private InspectionType inspectionType;
-    private InspectionEvaluation inspectionEvalation;
+    private InspectionEvaluation inspectionEvaluation;
     // private String inspectionStage; // auto?
     //private int controllorId;
     // private datum
 
 
-    public Inspection(int inspectionId, Owner owner, Vehicle vehicle, InspectionType inspectionType, InspectionEvaluation inspectionEvalation) {
+    public Inspection(int inspectionId, Owner owner, Vehicle vehicle, String inspectionType, String inspectionEvaluation) {
         this.inspectionId = inspectionId;
         this.owner = owner;
         this.vehicle = vehicle;
-        this.inspectionType = inspectionType;
-        this.inspectionEvalation = inspectionEvalation;
+        this.inspectionType = InspectionType.valueOf(inspectionType);
+        this.inspectionEvaluation = InspectionEvaluation.valueOf(inspectionEvaluation);
     }
 
     public int getInspectionId() {
@@ -59,11 +59,11 @@ public class Inspection {
         this.inspectionType = inspectionType;
     }
 
-    public InspectionEvaluation getInspectionEvalation() {
-        return inspectionEvalation;
+    public InspectionEvaluation getInspectionEvaluation() {
+        return inspectionEvaluation;
     }
 
-    public void setInspectionEvalation(InspectionEvaluation inspectionEvalation) {
-        this.inspectionEvalation = inspectionEvalation;
+    public void setInspectionEvaluation(InspectionEvaluation inspectionEvaluation) {
+        this.inspectionEvaluation = inspectionEvaluation;
     }
 }

@@ -21,14 +21,14 @@ public class Vehicle {
     // boja , kubikaža motora, broj sjedista, broj motora, broj šasije
 
 
-    public Vehicle(int vehicleId, VehicleCategory vehicleCategory, SimpleStringProperty brand, SimpleStringProperty motorNumber, SimpleStringProperty registrationPlate, Fuel fuel, SimpleIntegerProperty year) {
+    public Vehicle(int vehicleId, String vehicleCategory, String brand, String motorNumber, String registrationPlate, String fuel, int year) {
         this.vehicleId = vehicleId;
-        this.vehicleCategory = vehicleCategory;
-        this.brand = brand;
-        this.motorNumber = motorNumber;
-        this.registrationPlate = registrationPlate;
-        this.fuel = fuel;
-        this.year = year;
+        this.vehicleCategory = VehicleCategory.valueOf(vehicleCategory);
+        this.brand = new SimpleStringProperty(brand);
+        this.motorNumber = new SimpleStringProperty(motorNumber);
+        this.registrationPlate = new SimpleStringProperty(registrationPlate);
+        this.fuel = Fuel.valueOf(fuel);
+        this.year = new SimpleIntegerProperty(year);
     }
 
     public Vehicle() {
