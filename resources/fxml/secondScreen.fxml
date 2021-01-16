@@ -2,10 +2,11 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -21,7 +22,7 @@
                     <children>
                         <VBox alignment="CENTER_LEFT" spacing="10.0">
                             <children>
-                                <Button mnemonicParsing="false" onAction="#addNewAction" text="Add new" />
+                                <Button mnemonicParsing="false" onAction="#addNewAction" text="Add new " />
                                 <Button mnemonicParsing="false" onAction="#archiveAction" text="Archive" />
                                 <Button mnemonicParsing="false" onAction="#deleteAction" text="Delete " />
                             </children>
@@ -38,7 +39,7 @@
                     <children>
                         <VBox alignment="CENTER_LEFT" spacing="8.0">
                             <children>
-                                <Button mnemonicParsing="false" onAction="#modifyAction" text="Modify " />
+                                <Button mnemonicParsing="false" onAction="#modifyAction" text="Modify" />
                                 <Button mnemonicParsing="false" onAction="#identificationAction" text="Identification" />
                                 <Button mnemonicParsing="false" onAction="#inspectionAction" text="Inspection" />
                             </children>
@@ -47,7 +48,8 @@
                 </HBox>
                 <HBox spacing="10.0">
                     <children>
-                        <Button mnemonicParsing="false" onAction="#archiveInspectionAction" text="Archived inspections" />
+                        <Button mnemonicParsing="false" onAction="#archivedClientsAction" text="Archived clients" />
+                        <Button mnemonicParsing="false" onAction="#archivedInspectionsAction" text="Archived inspectios" />
                     </children>
                     <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -91,7 +93,13 @@
             </children>
         </VBox>
     </top>
-   <center>
-      <ListView fx:id="listInspections" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-   </center>
+    <center>
+        <TableView fx:id="tableView" BorderPane.alignment="CENTER">
+            <columns>
+                <TableColumn fx:id="vehicleCol" maxWidth="-1.0" minWidth="100.0" prefWidth="-1.0" text="Vehicle" />
+                <TableColumn fx:id="ownerCol" maxWidth="-1.0" minWidth="100.0" prefWidth="-1.0" text="Owner" />
+                <TableColumn fx:id="evaluationCol" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="-1.0" text="Evaluation" />
+            </columns>
+        </TableView>
+    </center>
 </BorderPane>
