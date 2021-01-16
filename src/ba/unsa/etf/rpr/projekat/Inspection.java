@@ -1,13 +1,9 @@
 package ba.unsa.etf.rpr.projekat;
 
-public class Inspection {
-    public enum InspectionType {
-        REGULAR, EXTRAORDINARY, PREVENTIVE;
-    }
+import ba.unsa.etf.rpr.projekat.enums.InspectionEvaluation;
+import ba.unsa.etf.rpr.projekat.enums.InspectionType;
 
-    public enum InspectionEvaluation {
-        FAILED, PASSED, NO_DATA;
-    }
+public class Inspection {
 
     private int inspectionId;
     private Owner owner;
@@ -18,6 +14,8 @@ public class Inspection {
     //private int controllorId;
     // private datum
 
+
+    public Inspection() {}
 
     public Inspection(int inspectionId, Owner owner, Vehicle vehicle, String inspectionType, String inspectionEvaluation) {
         this.inspectionId = inspectionId;

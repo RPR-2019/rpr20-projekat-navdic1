@@ -7,11 +7,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 
-
+import static javafx.scene.control.PopupControl.USE_COMPUTED_SIZE;
 
 
 public class SecondController {
@@ -42,6 +47,22 @@ public class SecondController {
     }
 
     public void addNewAction(ActionEvent actionEvent){
+        Stage stage = new Stage();
+        Parent root = null;
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/formular.fxml"));
+            FormularController formularController = new FormularController();
+            loader.setController(formularController);
+            root = loader.load();
+            stage.setTitle("Formular");
+            stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
+            stage.setResizable(false); // formulari
+            stage.show();
+            stage.setOnHiding(event->{
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     public void archiveAction(ActionEvent actionEvent){}
     public void deleteAction(ActionEvent actionEvent){}

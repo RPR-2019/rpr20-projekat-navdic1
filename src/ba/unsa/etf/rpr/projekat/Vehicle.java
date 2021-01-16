@@ -1,15 +1,12 @@
 package ba.unsa.etf.rpr.projekat;
 
+import ba.unsa.etf.rpr.projekat.enums.Fuel;
+import ba.unsa.etf.rpr.projekat.enums.VehicleCategory;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Vehicle {
-    public enum VehicleCategory {
-        TESKA, LAKA, SREDNJA;
-    }
-    public enum Fuel {
-        BENSINE, DIESEL;
-    }
+
     //owner??
     private int vehicleId;
     private VehicleCategory vehicleCategory;

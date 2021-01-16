@@ -1,19 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.Spinner?>
-<?import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
 <GridPane hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" vgap="10.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
@@ -65,7 +55,7 @@
         <Label text="Podaci o pregledu" GridPane.columnIndex="1" GridPane.rowIndex="6" />
         <ChoiceBox fx:id="inspectionTypeChoiceBox" GridPane.columnIndex="2" GridPane.rowIndex="7" />
         <ChoiceBox fx:id="fuelChoiceBox" GridPane.columnIndex="5" GridPane.rowIndex="5" />
-        <TextField fx:id="brendFld" GridPane.columnIndex="5" GridPane.rowIndex="3" />
+        <TextField fx:id="brandFld" GridPane.columnIndex="5" GridPane.rowIndex="3" />
         <Spinner fx:id="yearSpinner" GridPane.columnIndex="5" GridPane.rowIndex="4">
             <valueFactory>
                 <SpinnerValueFactory.IntegerSpinnerValueFactory amountToStepBy="1" initialValue="2005" max="2020" min="1980" />
