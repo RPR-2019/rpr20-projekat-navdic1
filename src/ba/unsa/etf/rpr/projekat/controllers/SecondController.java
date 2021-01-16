@@ -59,7 +59,18 @@ public class SecondController {
             stage.setResizable(false); // formulari
             stage.show();
             stage.setOnHiding(event->{
-            });
+                Inspection inspection = formularController.getInspection();
+                if(inspection!=null) {
+                    int idOwner = dao.addOwner(inspection.getOwner());
+                    int idVehicle = dao.addVehicle(inspection.getVehicle());
+                    inspection.getOwner().setOwnerId(idOwner);
+                    inspection.getVehicle().setVehicleId(idVehicle);
+                    dao.addInspection(inspection);
+                    inspections.setAll(dao.getInspections());
+                    //  technicalInspection.setInspectionEvaluation("Visual Passed");
+                    //
+                }
+                });
         } catch (IOException e) {
             e.printStackTrace();
         }
