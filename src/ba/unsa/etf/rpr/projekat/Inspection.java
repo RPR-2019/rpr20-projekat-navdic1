@@ -1,6 +1,6 @@
 package ba.unsa.etf.rpr.projekat;
 
-public class TechnicalInspection {
+public class Inspection {
     public enum InspectionType {
         REGULAR, EXTRAORDINARY, PREVENTIVE;
     }
@@ -19,7 +19,7 @@ public class TechnicalInspection {
     // private datum
 
 
-    public TechnicalInspection(int inspectionId, Owner owner, Vehicle vehicle, InspectionType inspectionType, InspectionEvaluation inspectionEvalation) {
+    public Inspection(int inspectionId, Owner owner, Vehicle vehicle, InspectionType inspectionType, InspectionEvaluation inspectionEvalation) {
         this.inspectionId = inspectionId;
         this.owner = owner;
         this.vehicle = vehicle;
