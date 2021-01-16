@@ -58,7 +58,11 @@ public class FormularController {
         Stage stage =(Stage) brandFld.getScene().getWindow();
         stage.close();
     }
-    public void cancelAction(){}
+    public void cancelAction(){
+        inspection = null;
+        Stage stage = (Stage) brandFld.getScene().getWindow();
+        stage.close();
+    }
 
     private boolean emptyField(TextField textField){
         if(textField.getText().trim().isEmpty()){
