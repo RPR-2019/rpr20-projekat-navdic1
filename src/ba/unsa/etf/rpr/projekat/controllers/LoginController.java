@@ -55,7 +55,7 @@ public class LoginController {
                 Stage stage = new Stage();
                 Parent root = null;
                 try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/second.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/secondScreen.fxml"));
                     SecondController secondController = new SecondController();
                     loader.setController(secondController);
                     root = loader.load();
