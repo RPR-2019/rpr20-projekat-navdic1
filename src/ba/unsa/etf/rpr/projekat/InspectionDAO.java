@@ -15,7 +15,7 @@ public class InspectionDAO {
     private PreparedStatement getInspectionsQuery, getOwnerQuery, getVehicleQuery,
     getVehicleIdQuery, getOwnerIdQuery, getInspectionIdQuery, addOwnerQuery, addVehicleQuery,
     addInspectionQuery, getOwnersQuery, getVehiclesQuery, modifyOwnerQuery, modifyVehicleQuery, 
-    modifyInspectionQuery;
+    modifyInspectionQuery, deleteOwnerQuery, deleteVehicleQuery, deleteInspectionQuery;
 
     private InspectionDAO() {
         try{
@@ -47,7 +47,9 @@ public class InspectionDAO {
             modifyOwnerQuery = connection.prepareStatement("UPDATE owner SET name=?, surname=?, serial_number=? WHERE owner_id=?");
             modifyVehicleQuery = connection.prepareStatement("UPDATE vehicle SET vehicle_category=?, brand=?, motor_number=?, registration_plate=?, fuel=?, year=? WHERE vehicle_id=?");
             modifyInspectionQuery = connection.prepareStatement("UPDATE inspection SET owner=?, vehicle=?, type=?, evaluation=? WHERE inspection_id=?");
-        
+            deleteOwnerQuery = connection.prepareStatement("DELETE FROM owner WHERE owner_id=?");
+            deleteVehicleQuery = connection.prepareStatement("DELETE FROM vehicle WHERE vehicle_id=?");
+            deleteInspectionQuery = connection.prepareStatement("DELETE FROM inspection WHERE inspection_id=?");
         } 
         catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -222,6 +224,31 @@ public class InspectionDAO {
             modifyInspectionQuery.setString(4, inspection.getInspectionEvaluation().toString());
             modifyInspectionQuery.setInt(5, inspection.getInspectionId());
             modifyInspectionQuery.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public void deleteOwner(Owner owner){
+        try{
+            deleteOwnerQuery.setInt(1, owner.getOwnerId());
+            deleteOwnerQuery.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+    public void deleteVehicle(Vehicle vehicle){
+        try{
+            deleteVehicleQuery.setInt(1, vehicle.getVehicleId());
+            deleteVehicleQuery.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+    public void deleteInspection(Inspection inspection){
+        try{
+            deleteInspectionQuery.setInt(1, inspection.getInspectionId());
+            deleteInspectionQuery.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

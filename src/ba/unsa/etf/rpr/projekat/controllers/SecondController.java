@@ -10,10 +10,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.util.Optional;
+
 import static javafx.scene.control.PopupControl.USE_COMPUTED_SIZE;
 
 
@@ -103,7 +107,24 @@ public class SecondController {
         }
     }
     public void archiveAction(ActionEvent actionEvent){}
-    public void deleteAction(ActionEvent actionEvent){}
+    public void deleteAction(ActionEvent actionEvent){
+        Inspection inspection = tableView.getSelectionModel().getSelectedItem();
+        if(inspection == null) return;
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Potvrda brisanja");
+        alert.setHeaderText("Brisanje naloga "+inspection.getVehicle().toString() + ", " + inspection.getOwner().toString());
+        alert.setContentText("Da li ste sigurni da želite obrisati?");
+        alert.setResizable(true);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            dao.deleteOwner(inspection.getOwner());
+            dao.deleteVehicle(inspection.getVehicle());
+            dao.deleteInspection(inspection);
+            inspections.remove(inspection);
+        }
+    }
     public void identificationAction(ActionEvent actionEvent){}
     public void inspectionAction(ActionEvent actionEvent){}
     public void archivedInspectionsAction(ActionEvent actionEvent){}
