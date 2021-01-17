@@ -13,9 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
-
 import java.io.IOException;
-
 import static javafx.scene.control.PopupControl.USE_COMPUTED_SIZE;
 
 
@@ -39,7 +37,7 @@ public class SecondController {
             vehicleCol.setCellValueFactory(data-> new SimpleStringProperty(data.getValue().getVehicle().getBrand()));
             ownerCol.setCellValueFactory(data-> new SimpleStringProperty(data.getValue().getOwner().toString()));
             evaluationCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getInspectionEvaluation().toString()));
-            //  controllorCol.setCellValueFactory(data-> new SimpleStringProperty(data.getValue().getUser().toString()));
+            //  userCol.setCellValueFactory(data-> new SimpleStringProperty(data.getValue().getUser().toString()));
 
             tableView.getSelectionModel().selectedItemProperty().addListener((obs, oldInspection, newInspection)->{
                 tableView.refresh();
@@ -51,7 +49,7 @@ public class SecondController {
         Parent root = null;
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/formular.fxml"));
-            FormularController formularController = new FormularController();
+            FormularController formularController = new FormularController(null, dao.getOwners(), dao.getVehicles());
             loader.setController(formularController);
             root = loader.load();
             stage.setTitle("Formular");
@@ -67,17 +65,45 @@ public class SecondController {
                     inspection.getVehicle().setVehicleId(idVehicle);
                     dao.addInspection(inspection);
                     inspections.setAll(dao.getInspections());
-                    //  technicalInspection.setInspectionEvaluation("Visual Passed");
+                    //  inspection.setInspectionEvaluation("Visual Passed");
                     //
                 }
-                });
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void modifyAction(ActionEvent actionEvent){
+        Inspection inspection = tableView.getSelectionModel().getSelectedItem();
+        if(inspection == null) return;
+        Stage stage = new Stage();
+        Parent root = null;
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/formular.fxml"));
+            FormularController formularController = new FormularController(inspection,  dao.getOwners(), dao.getVehicles());
+            loader.setController(formularController);
+            root = loader.load();
+            stage.setTitle("Formular");
+            stage.setScene(new Scene(root, USE_COMPUTED_SIZE,USE_COMPUTED_SIZE));
+            stage.setResizable(false);
+            stage.show();
+            stage.setOnHiding(event->{
+                Inspection modifiedInsp = formularController.getInspection();
+                if(modifiedInsp!=null){
+                    dao.modifyOwner(modifiedInsp.getOwner());
+                    dao.modifyVehicle(modifiedInsp.getVehicle());
+                    dao.modifyInspection(modifiedInsp);
+                    inspections.setAll(dao.getInspections());
+                    // modifiedInsp.setInspectionEvaluation("Visual Passed");
+                }
+            });
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
     public void archiveAction(ActionEvent actionEvent){}
     public void deleteAction(ActionEvent actionEvent){}
-    public void modifyAction(ActionEvent actionEvent){}
     public void identificationAction(ActionEvent actionEvent){}
     public void inspectionAction(ActionEvent actionEvent){}
     public void archivedInspectionsAction(ActionEvent actionEvent){}

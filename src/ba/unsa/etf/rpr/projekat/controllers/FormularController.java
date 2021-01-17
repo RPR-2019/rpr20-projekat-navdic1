@@ -6,6 +6,7 @@ import ba.unsa.etf.rpr.projekat.enums.InspectionEvaluation;
 import ba.unsa.etf.rpr.projekat.enums.InspectionType;
 import ba.unsa.etf.rpr.projekat.enums.VehicleCategory;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
@@ -20,8 +21,19 @@ public class FormularController {
     public ComboBox<Owner> odaberiKlijentaComboBox;
     public ComboBox<Vehicle> odaberiVoziloComboBox;
     private Inspection inspection;
-    public FormularController() {
-        inspection = new Inspection();
+    private int ownerId ;
+    private int vehicleId;
+    private ObservableList<Owner> allOwners;
+    private ObservableList<Vehicle> allVehicles;
+    public FormularController(Inspection inspection, ObservableList<Owner> owners, ObservableList<Vehicle> vehicles) {
+        this.inspection = inspection; // novi ili modify
+        this.allOwners= owners;
+        this.allVehicles= vehicles;
+        if(inspection!=null) {
+            this.ownerId = inspection.getOwner().getOwnerId();
+            this.vehicleId = inspection.getVehicle().getVehicleId();
+        }
+
     }
 
     @FXML
@@ -29,10 +41,29 @@ public class FormularController {
         categoryChoiceBox.setItems(FXCollections.observableArrayList(VehicleCategory.values()));
         inspectionTypeChoiceBox.setItems(FXCollections.observableArrayList(InspectionType.values()));
         fuelChoiceBox.setItems(FXCollections.observableArrayList(Fuel.values()));
-        categoryChoiceBox.setValue(VehicleCategory.LAKA);
-        inspectionTypeChoiceBox.setValue(InspectionType.REGULAR);
-        fuelChoiceBox.setValue(Fuel.DIESEL);
-            // bindati text field sa comboboxovima??
+
+        if(inspection!=null) {
+            odaberiKlijentaComboBox.setDisable(true);
+            odaberiVoziloComboBox.setDisable(true);
+            nameFld.setText(inspection.getOwner().getName());
+            surnameFld.setText(inspection.getOwner().getSurname());
+            serialNumberFld.setText(inspection.getOwner().getSerialNumber());
+            categoryChoiceBox.setValue(inspection.getVehicle().getVehicleCategory());
+            brandFld.setText(inspection.getVehicle().getBrand());
+            yearSpinner.getValueFactory().setValue(inspection.getVehicle().getYear());
+            motorNumberFld.setText(inspection.getVehicle().getMotorNumber());
+            registrPlateFld.setText(inspection.getVehicle().getRegistrationPlate());
+            inspectionTypeChoiceBox.setValue(inspection.getInspectionType());
+            fuelChoiceBox.setValue(inspection.getVehicle().getFuel());
+
+        }else{
+            odaberiVoziloComboBox.setItems(allVehicles);
+            odaberiKlijentaComboBox.setItems(allOwners);
+            categoryChoiceBox.setValue(VehicleCategory.LAKA);
+            inspectionTypeChoiceBox.setValue(InspectionType.REGULAR);
+            fuelChoiceBox.setValue(Fuel.DIESEL);
+        // bindati text field sa comboboxovima??
+        }
         nameFld.textProperty().addListener(obs->emptyField(nameFld));
         surnameFld.textProperty().addListener(obs->emptyField(surnameFld));
         serialNumberFld.textProperty().addListener(obs-> emptyField(serialNumberFld));
@@ -47,9 +78,12 @@ public class FormularController {
                 || emptyField(brandFld) || emptyField(motorNumberFld) || emptyField(registrPlateFld) )
             return;
         // dodati za ostale boxove
-
-        inspection.setVehicle(new Vehicle(0, categoryChoiceBox.getValue().name(), brandFld.getText(), motorNumberFld.getText(), registrPlateFld.getText(), fuelChoiceBox.getValue().name(), (Integer) yearSpinner.getValue()));
-        inspection.setOwner(new Owner(0, nameFld.getText(), surnameFld.getText(), serialNumberFld.getText()));
+        if(inspection == null){
+            inspection = new Inspection();
+        }
+        //owner.getVehicles().add(vehicle)
+        inspection.setVehicle(new Vehicle(vehicleId, categoryChoiceBox.getValue().name(), brandFld.getText(), motorNumberFld.getText(), registrPlateFld.getText(), fuelChoiceBox.getValue().name(), (Integer) yearSpinner.getValue()));
+        inspection.setOwner(new Owner(ownerId, nameFld.getText(), surnameFld.getText(), serialNumberFld.getText()));
 
         inspection.setInspectionType(inspectionTypeChoiceBox.getValue());
         inspection.setInspectionEvaluation(InspectionEvaluation.NO_DATA);
